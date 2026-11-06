@@ -14,6 +14,7 @@
         android:src="@drawable/baseline_settings_24"
         android:clickable="true"
         android:focusable="true"
+        android:contentDescription="Go to Settings"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
