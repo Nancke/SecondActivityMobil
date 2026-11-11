@@ -13,6 +13,7 @@ import androidx.core.view.WindowInsetsCompat;
 public class SecoundActivity extends AppCompatActivity{
 
     ImageView Settings;
+    Button ContactAnna;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +21,8 @@ public class SecoundActivity extends AppCompatActivity{
         setContentView(R.layout.activity_secound);
 
         Settings = findViewById(R.id.gotoSettings);
+        ContactAnna = findViewById(R.id.AnnaContact);
+
         Settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -27,6 +30,18 @@ public class SecoundActivity extends AppCompatActivity{
                 startActivity(intent);
             }
 
+
+        });
+
+        ContactAnna.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SecoundActivity.this, MoneyStuff.class);
+                startActivity(intent);
+            }
         });
     }
+
+
+
 }
