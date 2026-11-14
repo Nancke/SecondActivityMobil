@@ -5,6 +5,7 @@ import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
@@ -23,6 +24,7 @@ public class MoneyStuff extends AppCompatActivity {
         Button Request = findViewById(R.id.Request);
         TextView SendResult = findViewById(R.id.ResultSend);
         TextView RequestResult = findViewById(R.id.ResultRequest);
+        LinearLayout linearlayout = findViewById(R.id.Lineargroup);
 
         Send.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,7 +39,12 @@ public class MoneyStuff extends AppCompatActivity {
 
                 builder.setPositiveButton("Confirm", (dialog, which) -> {
                     String amount = input.getText().toString();
-                    SendResult.setText("sent:" + amount + "kr");
+                    TextView textView = new TextView(MoneyStuff.this);
+                    textView.setText("sent:" + amount + "kr");
+                    styletextview(textView);
+
+                    
+                    linearlayout.addView(textView);
                     // ændre på TextView for og vise det rigtige svar
                     dialog.dismiss();
                 });
@@ -60,7 +67,12 @@ public class MoneyStuff extends AppCompatActivity {
 
                 builder.setPositiveButton("Confirm", (dialog, which) -> {
                     String amount = input.getText().toString();
-                    RequestResult.setText("Requested:" + amount + "kr");
+                    TextView textView = new TextView(MoneyStuff.this);
+                    textView.setText("Requested:" + amount + "kr");
+                    styletextview(textView);
+
+
+                    linearlayout.addView(textView);
                     // ændre på TextView for og vise det rigtige svar
                     dialog.dismiss();
                 });
@@ -71,6 +83,13 @@ public class MoneyStuff extends AppCompatActivity {
             }
         });
     }
+
+    void styletextview(TextView view){
+        view.setTextSize((float) 16);
+        view.setPadding(0, 5, 0,5 );
+
+    }
+
 
 
 
