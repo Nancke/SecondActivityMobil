@@ -40,6 +40,7 @@ public class SecoundActivity extends AppCompatActivity{
                 startActivity(intent);
             }
         });
+
     }
 
 

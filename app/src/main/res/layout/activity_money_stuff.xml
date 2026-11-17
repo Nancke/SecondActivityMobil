@@ -40,7 +40,8 @@
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:cornerRadius="0dp"/>
+        app:cornerRadius="0dp"
+        />
 
 
 
