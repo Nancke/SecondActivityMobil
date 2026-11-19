@@ -1,7 +1,10 @@
 package com.example.secondactivity;
 
+import static android.telephony.PhoneNumberUtils.formatNumber;
+
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.InputType;
@@ -20,19 +23,27 @@ import androidx.core.app.NotificationManagerCompat;
 
 public class MoneyStuff extends AppCompatActivity {
 
+    private SharedPreferences prefs;
+    private static final String PREFS_NAME = "MoneyPrefs";
+    private static final String KEY_ITEMS = "saved_money_items";
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_money_stuff);
 
+        prefs = getSharedPreferences("", MODE_PRIVATE);
+
         ImageView back = findViewById(R.id.goback);
         // forbinder knappen til sin id
         Button Send = findViewById(R.id.Send);
         Button Request = findViewById(R.id.Request);
-        TextView SendResult = findViewById(R.id.ResultSend);
-        TextView RequestResult = findViewById(R.id.ResultRequest);
+        TextView SendResult = findViewById(R.id.ResultSend);//dont realy get  used anymore but it bugged if deleted so just keep
+        TextView RequestResult = findViewById(R.id.ResultRequest); //dont realy get  used anymore but it bugged if deleted so just keep
         LinearLayout linearlayout = findViewById(R.id.Lineargroup);
+
+        loadSavedEntries(linearlayout);
 
         Send.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,14 +56,14 @@ public class MoneyStuff extends AppCompatActivity {
                 input.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
                 builder.setView(input);
 
+
+
                 builder.setPositiveButton("Confirm", (dialog, which) -> {
                     String amount = input.getText().toString();
-                    TextView textView = new TextView(MoneyStuff.this);
-                    textView.setText("sent:" + amount + "kr");
-                    styletextview(textView);
+                    String entryText = "sent:" + amount + "kr";
+                    addEntryView(linearlayout, entryText);
+                    saveEntry(entryText);
 
-                    
-                    linearlayout.addView(textView);
                     // ændre på TextView for og vise det rigtige svar
 
                     showMoneyNotification("Money Sent", "You sent " + amount + " kr");
@@ -76,7 +87,7 @@ public class MoneyStuff extends AppCompatActivity {
 
         });
 
-                Request.setOnClickListener(new View.OnClickListener() {
+        Request.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(MoneyStuff.this);
@@ -88,13 +99,11 @@ public class MoneyStuff extends AppCompatActivity {
 
                 builder.setPositiveButton("Confirm", (dialog, which) -> {
                     String amount = input.getText().toString();
-                    TextView textView = new TextView(MoneyStuff.this);
-                    textView.setText("Requested:" + amount + "kr");
-                    styletextview(textView);
+                    String entryText = "Requested:" + amount + "kr";
+                    addEntryView(linearlayout, entryText);
+                    saveEntry(entryText);
 
-
-                    linearlayout.addView(textView);
-                    // ændre på TextView for og vise det rigtige svar
+                    //ændre på TextView for og vise det rigtige svar
 
                     showMoneyNotification("Money Requested", "You requested " + amount + " kr");
                     //faktisk viser hvor mange penge man requester med en notification
@@ -108,6 +117,29 @@ public class MoneyStuff extends AppCompatActivity {
             }
 
         });
+    }
+    private void addEntryView(LinearLayout linearlayout, String text) {
+        TextView textView = new TextView(MoneyStuff.this);
+        textView.setText(text);
+        styletextview(textView);
+        linearlayout.addView(textView);
+    }
+
+    private void saveEntry(String entryText) {
+        String existing = prefs.getString(KEY_ITEMS, "MoneyTrack");
+        String updated = existing.isEmpty() ? entryText : existing + ";;" + entryText;
+        prefs.edit().putString(KEY_ITEMS, updated).apply();
+    }
+
+    private void loadSavedEntries(LinearLayout linearlayout) {
+        linearlayout.removeAllViews();
+        String saved = prefs.getString(KEY_ITEMS, "");
+        if (!saved.isEmpty()) {
+            String[] items = saved.split(";;");
+            for (String item : items) {
+                addEntryView(linearlayout, item);
+            }
+        }
     }
     private void showMoneyNotification(String title, String message) {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "messages")
@@ -128,7 +160,6 @@ public class MoneyStuff extends AppCompatActivity {
         view.setPadding(0, 5, 0,5 );
 
     }
-
 
 
 
