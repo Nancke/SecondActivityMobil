@@ -6,22 +6,25 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowCompat;
-import androidx.core.view.WindowInsetsCompat;
+
 public class SecoundActivity extends AppCompatActivity{
 
-    ImageView Settings;
-    Button ContactAnna;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_secound);
 
-        Settings = findViewById(R.id.gotoSettings);
-        ContactAnna = findViewById(R.id.AnnaContact);
+
+        ImageView Settings = findViewById(R.id.gotoSettings);
+
+        Button ContactAnna = findViewById(R.id.AnnaContact);
+
+        Button create = findViewById(R.id.button3);
+
+
+
+
 
         Settings.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,6 +41,14 @@ public class SecoundActivity extends AppCompatActivity{
             public void onClick(View v) {
                 Intent intent = new Intent(SecoundActivity.this, MoneyStuff.class);
                 startActivity(intent);
+            }
+        });
+
+        create.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
             }
         });
 
