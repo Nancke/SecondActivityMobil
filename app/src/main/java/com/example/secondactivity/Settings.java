@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 
@@ -42,6 +43,7 @@ public class Settings extends AppCompatActivity {
 
         switchNotifications = findViewById(R.id.switchNotifications);
 
+        OnUserEdit();
         // 1. Set initial state of the switch based on current permission
         updateSwitchState();
 
@@ -96,6 +98,15 @@ public class Settings extends AppCompatActivity {
             switchNotifications.setChecked(true);
         }
     }
+    private void OnUserEdit()
+    {
 
+        Button editUser=findViewById(R.id.EditUser);
 
+        editUser.setOnClickListener(v -> {
+            Intent intent = new Intent(Settings.this, EditUser.class);
+            startActivity(intent);
+        });
+    }
 }
+

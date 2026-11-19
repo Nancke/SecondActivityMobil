@@ -1,6 +1,9 @@
 package com.example.secondactivity;
 
+
+
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -52,7 +55,15 @@ public class CreateUser extends AppCompatActivity {
     }
     private void registerUser(String name, String email, String password) {
 
+        //aparently realy easy with the use of SharedPrefences. just take there input from earlyer and actuly saves it
+        SharedPreferences prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
 
+        editor.putString("user_name", name);
+        editor.putString("user_email", email);
+        editor.putString("user_password", password);
+        editor.putBoolean("is_logged_in", true);
+        editor.apply();
         Intent intent = new Intent(CreateUser.this, SecoundActivity.class);
         startActivity(intent);
 

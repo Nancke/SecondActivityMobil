@@ -19,14 +19,8 @@ public class SecoundActivity extends AppCompatActivity{
 
     boolean[] checkedItems;
 
-    ImageView Settings = findViewById(R.id.gotoSettings);
 
-    Button ContactAnna = findViewById(R.id.AnnaContact);
-
-    LinearLayout linearlayout = findViewById(R.id.grouplist);
-
-    Button create = findViewById(R.id.button3);
-
+    private LinearLayout linearLayout;
 
     String[] members = {"Anna", "Peter", "John", "Mike", "michael"};
 
@@ -36,7 +30,14 @@ public class SecoundActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_secound);
+        //moved these down becasue it seem to crash if they are placed before OnCreate
+        ImageView Settings = findViewById(R.id.gotoSettings);
 
+        Button ContactAnna = findViewById(R.id.AnnaContact);
+
+        linearLayout = findViewById(R.id.grouplist);
+
+        Button create = findViewById(R.id.button3);
 
         Settings.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,7 +98,7 @@ public class SecoundActivity extends AppCompatActivity{
         button.setTextSize((float) 30);
         button.setHeight(75);
 
-        linearlayout.addView(button);
+        linearLayout.addView(button);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override

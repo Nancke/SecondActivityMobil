@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app2="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="24dp">
+
+    <EditText
+        android:id="@+id/etNewName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:hint="New name"
+        android:inputType="textPersonName"
+        app2:layout_constraintEnd_toEndOf="parent"
+        app2:layout_constraintHorizontal_bias="0.0"
+        app2:layout_constraintStart_toStartOf="parent"
+        app2:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/etNewPassword"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="72dp"
+        android:hint="New password (optional)"
+        android:inputType="textPassword"
+        app2:layout_constraintEnd_toEndOf="parent"
+        app2:layout_constraintHorizontal_bias="0.0"
+        app2:layout_constraintStart_toStartOf="parent"
+        app2:layout_constraintTop_toBottomOf="@id/etNewName" />
+
+    <EditText
+        android:id="@+id/enNewMail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="76dp"
+        android:hint="New mail (optional)"
+        android:inputType="textPassword"
+        app2:layout_constraintEnd_toEndOf="parent"
+        app2:layout_constraintHorizontal_bias="0.0"
+        app2:layout_constraintStart_toStartOf="parent"
+        app2:layout_constraintTop_toBottomOf="@id/etNewPassword" />
+
+    <Button
+        android:id="@+id/btnSaveChanges"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="76dp"
+        android:text="Save changes"
+        app2:layout_constraintStart_toStartOf="parent"
+        app2:layout_constraintTop_toBottomOf="@id/enNewMail" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+

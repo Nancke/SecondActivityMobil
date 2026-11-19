@@ -1,12 +1,14 @@
 package com.example.secondactivity;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -24,6 +26,7 @@ public class MoneyStuff extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_money_stuff);
 
+        ImageView back = findViewById(R.id.goback);
         // forbinder knappen til sin id
         Button Send = findViewById(R.id.Send);
         Button Request = findViewById(R.id.Request);
@@ -63,7 +66,17 @@ public class MoneyStuff extends AppCompatActivity {
             }
         });
 
-        Request.setOnClickListener(new View.OnClickListener() {
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MoneyStuff.this, SecoundActivity.class);
+                startActivity(intent);
+            }
+
+        });
+
+                Request.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(MoneyStuff.this);
@@ -93,6 +106,7 @@ public class MoneyStuff extends AppCompatActivity {
                 //pop-op
                 builder.show();
             }
+
         });
     }
     private void showMoneyNotification(String title, String message) {
