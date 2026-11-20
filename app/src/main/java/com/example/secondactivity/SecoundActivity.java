@@ -15,16 +15,16 @@ import androidx.constraintlayout.widget.Group;
 
 public class SecoundActivity extends AppCompatActivity{
 
-    public static String[] group1;
+    public static String[] group1 = {"","","","",""};
 
-    boolean[] checkedItems;
+
 
 
     private LinearLayout linearLayout;
 
     String[] members = {"Anna", "Peter", "John", "Mike", "michael"};
 
-
+    boolean[] toaddmembers = {false, false, false, false, false};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,30 +62,26 @@ public class SecoundActivity extends AppCompatActivity{
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(SecoundActivity.this);
                 builder.setTitle("Choose members for group");
-
-// Add a checkbox list
-                builder.setMultiChoiceItems(members, checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
+                System.out.println("start");
+                builder.setMultiChoiceItems(members, null, new DialogInterface.OnMultiChoiceClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-                        checkedItems[which] = !checkedItems[which];
+                        toaddmembers[which] = isChecked;
                     }
                 });
 
-// Add OK and Cancel buttons
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        for(int i = 0; i < checkedItems.length; i++){
-                            if(checkedItems[i]) { group1[i] = members[i]; }
+                        for(int i = 0; i < toaddmembers.length; i++){
+                            if(toaddmembers[i]) { group1[i] = members[i]; }
                         }
                         makeview();
                     }
                 });
                 builder.setNegativeButton("Cancel", null);
 
-// Create and show the alert dialog
-                AlertDialog dialog = builder.create();
-                dialog.show();
+                builder.show();
 
             }
         });
@@ -96,7 +92,7 @@ public class SecoundActivity extends AppCompatActivity{
         Button button = new Button(SecoundActivity.this);
         button.setText("Group1");
         button.setTextSize((float) 30);
-        button.setHeight(75);
+        button.setHeight(85);
 
         linearLayout.addView(button);
 
