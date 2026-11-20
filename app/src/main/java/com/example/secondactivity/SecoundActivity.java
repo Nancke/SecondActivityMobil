@@ -2,6 +2,7 @@ package com.example.secondactivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,13 +16,16 @@ import androidx.constraintlayout.widget.Group;
 
 public class SecoundActivity extends AppCompatActivity{
 
-    public static String[] group1 = {"","","","",""};
+    private SharedPreferences prefs;
+    private static final String PREFS_NAME = "GroupPrefs";
+    private static final String KEY_ITEMS = "Saved Groups";
 
 
 
 
     private LinearLayout linearLayout;
 
+    public static String[] group1 = {"","","","",""};
     String[] members = {"Anna", "Peter", "John", "Mike", "michael"};
 
     boolean[] toaddmembers = {false, false, false, false, false};
